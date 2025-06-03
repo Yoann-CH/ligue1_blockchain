@@ -247,56 +247,6 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ clubs, totalVotes }) => {
           </div>
         </CardContent>
       </Card>
-
-      {/* Tableau détaillé */}
-      <Card className="animate-slide-up bg-gray-900 text-white border-gray-800" style={{ animationDelay: '0.5s' }}>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <span>📋</span>
-            <span>Classement détaillé</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-700">
-                  <th className="text-left py-3 px-4">Position</th>
-                  <th className="text-left py-3 px-4">Club</th>
-                  <th className="text-center py-3 px-4">Votes</th>
-                  <th className="text-center py-3 px-4">Pourcentage</th>
-                </tr>
-              </thead>
-              <tbody>
-                {clubs
-                  .filter(club => club.votes > 0)
-                  .sort((a, b) => b.votes - a.votes)
-                  .map((club, index) => (
-                    <tr key={club.id} className="border-b border-gray-800 hover:bg-gray-800">
-                      <td className="py-3 px-4">
-                        <div className="flex items-center space-x-2">
-                          <span className="font-bold">#{index + 1}</span>
-                          {index < 3 && (
-                            <span className="text-lg ml-2">
-                              {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 font-medium">{club.name}</td>
-                      <td className="py-3 px-4 text-center font-bold text-white">
-                        {club.votes}
-                      </td>
-                      <td className="py-3 px-4 text-center">
-                        {club.percentage || 0}%
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };

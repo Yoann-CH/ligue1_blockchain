@@ -200,15 +200,9 @@ Les tests couvrent :
 ## 🎨 Fonctionnalités UI/UX
 
 ### 🌈 Design
-- **Gradient football** (bleu → vert)
+- **Gradient football** (noir → gris)
 - **Animations fluides** (fade-in, slide-up, bounce)
 - **Cartes interactives** avec effets hover
-- **Mode sombre/clair** (basé sur les préférences système)
-
-### 📱 Responsive
-- **Mobile First** design
-- **Grille adaptative** pour les clubs
-- **Navigation tactile** optimisée
 
 ### 🔔 Notifications
 - **Succès** : Vote confirmé
@@ -306,14 +300,6 @@ npx serve -s build
 - [ ] **Tests end-to-end**
 - [ ] **CI/CD Pipeline**
 
-## 🤝 Contribution
-
-1. Fork le projet
-2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
 ## 📝 Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
@@ -321,14 +307,6 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 ## 👥 Auteurs
 
 - **Votre Nom** - *Développement initial* - [@Yoann-CH](https://github.com/Yoann-CH) @Kieran-Huon(https://github.com/Kieran-Huon)
-
-## 🙏 Remerciements
-
-- **OpenZeppelin** pour les standards de sécurité
-- **Hardhat** pour l'excellent framework
-- **Tailwind CSS** pour le design system
-- **Metamask** pour l'intégration wallet
-- **Ligue de Football Professionnel** pour l'inspiration
 
 ---
 

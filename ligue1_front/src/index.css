@@ -120,3 +120,105 @@ body {
 .Toastify__toast--warning {
   background: linear-gradient(135deg, #f59e0b, #d97706);
 }
+
+@layer components {
+  /* Animations de base */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-in-out;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.5s ease-in-out;
+  }
+
+  /* Animation pour le logo dans l'overlay */
+  .animate-pulse-scale {
+    animation: pulseScale 2s infinite ease-in-out;
+  }
+
+  /* Animation pour la rotation autour du logo */
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  /* Animation pour la barre de progression indéfinie */
+  .animate-progress {
+    animation: progress 1.5s ease-in-out infinite;
+    background: linear-gradient(to right, transparent, white, transparent);
+    width: 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

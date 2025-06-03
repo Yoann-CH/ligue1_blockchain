@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter } from './ui/Card';
 import { Button } from './ui/Button';
 import { Club } from '../types';
 import { useDirectWallet } from '../hooks/useDirectWallet';
+import { useVotingContext } from '../hooks/useGlobalVotingState';
 import { toast } from 'react-toastify';
 
 interface ClubCardProps {
@@ -12,6 +13,7 @@ interface ClubCardProps {
 
 const ClubCard: React.FC<ClubCardProps> = ({ club, onVoteSuccess }) => {
   const { wallet, loading, vote } = useDirectWallet();
+  const { startVoting, endVoting } = useVotingContext();
   const [isVoting, setIsVoting] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
@@ -27,6 +29,9 @@ const ClubCard: React.FC<ClubCardProps> = ({ club, onVoteSuccess }) => {
     }
 
     setIsVoting(true);
+    // Activer l'overlay de chargement global
+    startVoting(`Vote en cours pour ${club.name}...`);
+    
     try {
       const txHash = await vote(club.id);
       toast.success(`Vote enregistré ! Transaction: ${txHash.slice(0, 10)}...`);
@@ -35,6 +40,8 @@ const ClubCard: React.FC<ClubCardProps> = ({ club, onVoteSuccess }) => {
       console.error('Erreur vote:', error);
       toast.error(error instanceof Error ? error.message : 'Erreur lors du vote');
     } finally {
+      // Désactiver l'overlay de chargement global
+      endVoting();
       setIsVoting(false);
     }
   };
