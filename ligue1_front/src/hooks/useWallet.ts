@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import { WalletState } from '../types';
-import { getServerUrl } from '../config/network';
+import { getServerUrl, CONTRACT_ADDRESS } from '../config/network';
 
 declare global {
   interface Window {
@@ -127,16 +127,11 @@ export const useWallet = () => {
       "function vote(uint256 _clubId) external"
     ];
 
-    // Adresse du contrat (à récupérer depuis l'API)
-    const contractResponse = await fetch(`${API_BASE_URL}/contract-info`);
-    const contractData = await contractResponse.json();
-    
-    if (!contractData.success) {
-      throw new Error('Impossible de récupérer l\'adresse du contrat');
-    }
+    // Utiliser l'adresse du contrat depuis la configuration
+    const contractAddress = CONTRACT_ADDRESS;
 
     const contract = new ethers.Contract(
-      contractData.contract.address,
+      contractAddress,
       contractABI,
       signer
     );

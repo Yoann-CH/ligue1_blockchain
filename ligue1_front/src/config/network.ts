@@ -1,5 +1,10 @@
 // Configuration réseau pour l'application
 export const getServerUrl = () => {
+  // En production
+  if (process.env.NODE_ENV === 'production') {
+    return window.location.origin.replace(/:\d+$/, '') + ':3001';
+  }
+  
   // En développement, détecter si on est sur localhost ou réseau local
   const hostname = window.location.hostname;
   
@@ -35,9 +40,13 @@ export const getHardhatRpcUrl = () => {
 
 // Configuration Metamask pour le réseau
 export const NETWORK_CONFIG = {
-  name: 'Hardhat Local Network',
-  chainId: '31337',
+  // En production, utiliser Sepolia
+  name: 'Sepolia Test Network',
+  chainId: '11155111',
   symbol: 'ETH',
-  rpcUrl: getHardhatRpcUrl(),
-  blockExplorer: ''
-}; 
+  rpcUrl: 'https://sepolia.infura.io/v3/your-infura-key',
+  blockExplorer: 'https://sepolia.etherscan.io'
+};
+
+// Configuration du contrat déployé
+export const CONTRACT_ADDRESS = '0x38355aEB43701BF45d6f3b1c184B4f29ae35f426'; 
