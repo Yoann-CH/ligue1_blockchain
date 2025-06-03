@@ -7,13 +7,13 @@ import ClubCard from './components/ClubCard';
 import ResultsChart from './components/ResultsChart';
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/Card';
 import { Button } from './components/ui/Button';
-import { useRealTimeData } from './hooks/useApi';
+import { useDirectBlockchainData } from './hooks/useDirectBlockchainData';
 
 type TabType = 'vote' | 'results';
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabType>('vote');
-  const { clubs, results, loading, refresh } = useRealTimeData(10000); // Refresh toutes les 10 secondes
+  const { clubs, results, loading, error, refresh } = useDirectBlockchainData(10000); // Refresh toutes les 10 secondes
 
   const handleVoteSuccess = () => {
     // Rafraîchir les données après un vote réussi
@@ -54,18 +54,35 @@ function App() {
           </div>
         </div>
 
+        {/* Message d'erreur */}
+        {error && (
+          <div className="bg-red-900 text-white p-4 rounded-lg mb-8 animate-fade-in">
+            <h3 className="font-bold flex items-center">
+              <span className="mr-2">⚠️</span> Erreur de connexion à la blockchain
+            </h3>
+            <p className="text-sm mt-1">{error}</p>
+            <Button 
+              variant="outline" 
+              className="mt-2 bg-red-800 hover:bg-red-700 border-red-700"
+              onClick={refresh}
+            >
+              Réessayer
+            </Button>
+          </div>
+        )}
+
         {/* Chargement */}
         {loading && (
           <div className="flex justify-center items-center py-12">
             <div className="text-center">
               <div className="w-12 h-12 border-4 border-gray-700 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-400">Chargement des données...</p>
+              <p className="text-gray-400">Chargement des données depuis la blockchain...</p>
             </div>
           </div>
         )}
 
         {/* Contenu principal */}
-        {!loading && (
+        {!loading && !error && (
           <>
             {activeTab === 'vote' && (
               <div className="space-y-8">
@@ -133,7 +150,7 @@ function App() {
                 </div>
 
                 {/* Message si pas de clubs */}
-                {clubs.length === 0 && (
+                {clubs.length === 0 && !error && !loading && (
                   <Card className="bg-gray-900 border-gray-800 text-white">
                     <CardContent className="text-center py-12">
                       <div className="text-6xl mb-4">⚽</div>
@@ -177,8 +194,8 @@ function App() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-300">
-                      Découvrez les résultats du vote en temps réel. Les données sont automatiquement 
-                      synchronisées avec la blockchain Ethereum.
+                      Découvrez les résultats du vote en temps réel. Les données sont directement 
+                      récupérées depuis la blockchain Ethereum (réseau Sepolia).
                     </p>
                   </CardContent>
                 </Card>
