@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from './ui/Button';
-import { useWallet } from '../hooks/useWallet';
+import { useDirectWallet } from '../hooks/useDirectWallet';
 
 const Header: React.FC = () => {
-  const { wallet, loading, isMetamaskInstalled, connectWallet, disconnectWallet, refreshWalletStatus } = useWallet();
+  const { wallet, loading, error, isMetamaskInstalled, connectWallet, disconnectWallet, refreshWalletStatus } = useDirectWallet();
 
   const handleWalletAction = async () => {
     if (wallet.isConnected) {
@@ -51,6 +51,13 @@ const Header: React.FC = () => {
               <div className="bg-gray-800 rounded-lg px-4 py-2 border border-gray-700">
                 <p className="text-sm font-medium">✅ Vous avez voté !</p>
                 <p className="text-xs text-gray-400">Merci pour votre participation</p>
+              </div>
+            )}
+
+            {/* Afficher l'erreur si présente */}
+            {error && (
+              <div className="bg-red-900 rounded-lg px-4 py-2 border border-red-800">
+                <p className="text-xs text-white">⚠️ {error.includes(':') ? error.split(':')[0] : error}</p>
               </div>
             )}
 

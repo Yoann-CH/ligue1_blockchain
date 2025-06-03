@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardFooter } from './ui/Card';
 import { Button } from './ui/Button';
 import { Club } from '../types';
-import { useWallet } from '../hooks/useWallet';
+import { useDirectWallet } from '../hooks/useDirectWallet';
 import { toast } from 'react-toastify';
 
 interface ClubCardProps {
@@ -11,7 +11,7 @@ interface ClubCardProps {
 }
 
 const ClubCard: React.FC<ClubCardProps> = ({ club, onVoteSuccess }) => {
-  const { wallet, vote } = useWallet();
+  const { wallet, loading, vote } = useDirectWallet();
   const [isVoting, setIsVoting] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
@@ -107,7 +107,7 @@ const ClubCard: React.FC<ClubCardProps> = ({ club, onVoteSuccess }) => {
         <Button
           variant={isUserChoice ? "secondary" : "primary"}
           onClick={handleVote}
-          disabled={!canVote || isVoting}
+          disabled={!canVote || isVoting || loading}
           className={`
             w-full vote-button transition-all duration-300
             ${isUserChoice ? 'bg-gray-700 hover:bg-gray-600' : ''}
