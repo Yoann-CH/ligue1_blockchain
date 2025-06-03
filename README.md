@@ -320,7 +320,7 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## 👥 Auteurs
 
-- **Votre Nom** - *Développement initial* - [@votre-github](https://github.com/votre-username)
+- **Votre Nom** - *Développement initial* - [@Yoann-CH](https://github.com/Yoann-CH) @Kieran-Huon(https://github.com/Kieran-Huon)
 
 ## 🙏 Remerciements
 

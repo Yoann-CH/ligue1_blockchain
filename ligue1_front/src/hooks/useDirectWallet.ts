@@ -50,7 +50,7 @@ export const useDirectWallet = () => {
       // Vérifier si l'adresse a voté
       const hasVoted = await contract.checkHasVoted(address);
       
-      let voterChoice = null;
+      let voterChoice: number | null = null;
       if (hasVoted) {
         try {
           // Récupérer le choix de l'utilisateur si l'utilisateur a voté
